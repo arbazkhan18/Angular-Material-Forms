@@ -1,0 +1,151 @@
+<mat-tab-group>
+  <mat-tab label="login">
+    <ng-container *ngTemplateOutlet="logintab"> </ng-container>
+  </mat-tab>
+  <mat-tab label="sign up">
+    <ng-container *ngTemplateOutlet="signuptab"> </ng-container>
+  </mat-tab>
+  <mat-tab label="Reset Password">
+    <ng-container *ngTemplateOutlet="resetpassword"> </ng-container>
+  </mat-tab>
+</mat-tab-group>
+
+<ng-template #logintab>
+    <div class="col-lg-12">
+      <mat-card-title class="mat-display-2"><i>Login </i></mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit(loginForm.value)">
+        <h4 style="color: red">{{loginMsg}}</h4>
+        <mat-form-field class="col-lg-6 left">
+          <input formControlName="username" matInput placeholder="username">
+        </mat-form-field>
+        <mat-form-field class="col-lg-6  right">
+          <input type=password formControlName="password" matInput placeholder="password">
+        </mat-form-field>
+       
+          <button mat-raised-button color="primary" [mat-dialog-close]="true" style="float:right" id="loginClose">
+            close</button>
+          <button mat-raised-button color="primary" style="bottom:0px;margin-right:16px;float:right;"> submit</button>
+        
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #signuptab>
+      <div class="col-lg-12">
+        <h2 mat-dialog-title>sign Up</h2>
+    
+        <form [formGroup]="regiForm" (ngSubmit)="onFormSubmit(regiForm.value)">
+          <mat-dialog-content class="mat-typography" style="width:100%;">
+            <mat-form-field class="col-lg-4  col-sm-12 left">
+              <input formControlName="firstname" matInput placeholder="firstname">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4  col-sm-12 center">
+              <input formControlName="lastname" matInput placeholder="lastname">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 right">
+    
+    
+              <input matInput [matDatepicker]="picker8" (focus)="picker8.open" formControlName="dob" placeholder="D.O.B"
+                (focus)="picker8.open()" (click)="picker8.open()" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+              <mat-datepicker #picker8></mat-datepicker>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-4 col-sm-12 left">
+              <input formControlName="email" matInput placeholder="email">
+              <mat-error>
+                <span *ngIf="!regiForm.get('email').valid && regiForm.get('email').touched">Enter proper Email !!!</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 center">
+              <input formControlName="phone" matInput placeholder="phone">
+              <mat-error>
+                <span *ngIf="!regiForm.get('phone').valid && regiForm.get('phone').touched">Enter proper ph.no !!!</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 right">
+              <input formControlName="address" matInput placeholder="address">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 left">
+              <input formControlName="userId" matInput placeholder="userId">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 center">
+              <input type=" password" formControlName="password" matInput placeholder="password">
+            </mat-form-field>
+            <!-- <mat-form-field class="col-lg-4 col-sm-12 right">
+                <input formControlName="status" matInput placeholder="status">
+              </mat-form-field> -->
+            <!-- <mat-form-field class="col-lg-4 col-sm-12 left">
+                <input formControlName="role" matInput placeholder="role">
+              </mat-form-field> -->
+            <mat-form-field class="col-lg-4 col-sm-12 center">
+              <mat-select formControlName="securityQ" matInput placeholder="securityQuestion">
+                <!-- <mat-option *ngFor="let sq of createUserserviceservice.securityQs" [value]="sq">{{sq}}</mat-option> -->
+              </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field class="col-lg-4 col-sm-12 center">
+                <input formControlName="securityQ" matInput placeholder="securityQuestion">
+              </mat-form-field> -->
+            <mat-form-field class="col-lg-4  col-sm-12 right">
+              <input formControlName="securityA" matInput placeholder="securityAnswer">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4  col-sm-12 left">
+              <input formControlName="companyName" matInput placeholder="companyName">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4  col-sm-12 center">
+              <input formControlName="companyAddress" matInput placeholder="companyAddress">
+            </mat-form-field>
+            <mat-form-field class="col-lg-4 col-sm-12 ">
+              <input formControlName="companyPhone" matInput placeholder="companyPhone">
+            </mat-form-field>
+            <h1 style="color: darkred"> {{userMsg}}</h1>
+          </mat-dialog-content>
+          <mat-dialog-actions align="end" style="margin-bottom:5px;">
+            <button mat-raised-button color="primary" [mat-dialog-close]="true" id="newUserClose"> close</button>
+            <button mat-raised-button color="primary" (click)="openSnackBar(message.value, action.value)">
+              Register</button>
+          </mat-dialog-actions>
+        </form>
+    
+      </div>
+    </ng-template>
+    <ng-template #resetpassword>
+      <div class="col-lg-12">
+        <h2 mat-dialog-title>Reset Password</h2>
+        <h4 style="color: cornflowerblue"> {{userrMsg}}</h4>
+        <form [formGroup]="forgotForm" (ngSubmit)="onForgetSubmit(forgotForm.value)">
+          <mat-dialog-content class="mat-typography" style="width:100%;">
+            <mat-form-field class="col-lg-6 col-sm-12 ">
+              <input formControlName="userId" matInput placeholder="userId">
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-sm-12">
+              <input matInput [matDatepicker]="picker8" (focus)="picker.open" formControlName="dateOfBirth" placeholder="dateOfBirth"
+                (focus)="picker8.open()" (click)="picker8.open()" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+              <mat-datepicker #picker8></mat-datepicker>
+            </mat-form-field>
+           
+            <mat-form-field class="col-lg-6 col-sm-12">
+              <mat-select formControlName="securityQ" matInput placeholder="securityQ">
+                <!-- <mat-option *ngFor="let sq of createUserserviceservice.securityQs" [value]="sq">{{sq}}</mat-option> -->
+              </mat-select>
+            </mat-form-field>
+           
+            <mat-form-field class="col-lg-6 col-sm-12 ">
+              <input formControlName="securityA" matInput placeholder="securityA">
+            </mat-form-field>
+            <mat-form-field class="col-lg-12 col-sm-12">
+              <input formControlName="newPassword" matInput placeholder="newPassword">
+            </mat-form-field>
+          </mat-dialog-content>
+          <mat-dialog-actions align="end" style="margin-bottom:5px;">
+            <button mat-raised-button color="primary" [mat-dialog-close]="true" style="float: right" id="resetPasswordClose">
+              close</button>
+            <button mat-raised-button color="primary" style="bottom:0px;margin-left:16px;float:right;">
+              Reset</button>
+    
+          </mat-dialog-actions>
+        </form>
+    
+      </div>
+    </ng-template>
