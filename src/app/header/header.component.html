@@ -1,1 +1,24 @@
-<mat-toolbar color="primary">My App</mat-toolbar>
+<div class="toolbar">
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a routerLink="/TemplateForm"> Template Forms </a>
+        </li>
+        <li>
+          <a routerLink="/ReactiveForm"> Reactive Forms</a>
+        </li>
+        <li>
+          <a routerLink="/LoginDialog"> Login </a>
+        </li>
+        <li>
+          <button mat-raised-button (click)="openDialoglogin()"> click me </button>
+
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</div>
